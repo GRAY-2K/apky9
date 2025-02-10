@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>MEDICAL EQUIPMENT DETAILS</title>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+   <link rel="stylesheet" href="styles.css" />
+   <!-- Firebase SDK -->
+   <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+ </head>
+ <body>
+   <!-- Add this div right after body tag -->
+   <div class="blur-background"></div>
+
+   <!-- Auth Container -->
+   <div id="auth-container">
+     <!-- Add the header inside the auth container -->
+     <div class="login-header">
+       <h1>BME</h1>
+       <h2>MEDICAL EQUIPMENT SEARCH</h2>
+     </div>
+     
+     <div id="login-form">
+       <form onsubmit="handleAuth(event); return false;">
+         <div id="status"></div>
+         <input type="email" id="email-input" placeholder="Email" required>
+         <input type="password" id="password-input" placeholder="Password" required>
+         
+         <!-- Add remember me checkbox -->
+         <div class="form-options">
+           <label class="remember-me">
+             <input type="checkbox">
+             <span>Remember me</span>
+           </label>
+           <a href="#" class="forgot-password" onclick="resetPassword(document.getElementById('email-input').value)">
+             Forgot your password?
+           </a>
+         </div>
+
+         <div class="auth-buttons">
+           <button type="submit" id="auth-submit-button">Sign In</button>
+         </div>
+       </form>
+     </div>
+   </div>
+
+   <!-- Header - Initially hidden -->
+   <div class="header" style="display: none;">
+     <button id="logout-button" style="display: none;">SIGN OUT</button>
+     <h2>MEDICAL EQUIPMENT DETAILS</h2>
+     <div class="version"></div>
+   </div>
+
+   <!-- App Content (Hidden until authenticated) -->
+   <div id="app-content" style="display: none;">
+     <div class="container" style="padding: 0">
+       <div id="status"></div>
+       <div id="searchContainer" style="display: none;">
+         <div style="display: flex; justify-content: center">
+           <input type="text" id="searchInput" placeholder="Enter BME Number" />
+         </div>
+         <div id="formResult" style="text-align: center; margin-top: 2rem"></div>
+       </div>
+     </div>
+   </div>
+
+   <!-- Initialize Firebase -->
+   <script>
+     const firebaseConfig = {
+       apiKey: "AIzaSyCKX_fhVS7wuXysk1ddCg6m3cVtYpdcWO0",
+       authDomain: "medical-equipment-details.firebaseapp.com",
+       projectId: "medical-equipment-details",
+       storageBucket: "medical-equipment-details.firebasestorage.app",
+       messagingSenderId: "863027184737",
+       appId: "1:863027184737:web:2afc922df244c6dd2e5620"
+     };
+     
+     // Initialize Firebase
+     firebase.initializeApp(firebaseConfig);
+   </script>
+
+   <!-- JavaScript File -->
+   <script src="app.js"></script>
+
+   <!-- Initialize Auth Check -->
+   <script>
+     // Add this line after app.js is loaded
+     checkAuth();
+   </script>
+ </body>
+</html>
